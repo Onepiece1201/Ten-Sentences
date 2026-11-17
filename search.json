@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ten Sentence Term Paper",
+    "section": "",
+    "text": "Academic performance is an important aspect of students’ educational success, and study time may be related to their academic outcomes.\nThis study examines whether students who spend more time studying tend to achieve higher final grades."
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Ten Sentence Term Paper",
+    "section": "",
+    "text": "Academic performance is an important aspect of students’ educational success, and study time may be related to their academic outcomes.\nThis study examines whether students who spend more time studying tend to achieve higher final grades."
+  },
+  {
+    "objectID": "index.html#literature-review",
+    "href": "index.html#literature-review",
+    "title": "Ten Sentence Term Paper",
+    "section": "Literature Review",
+    "text": "Literature Review\nPrevious research by Cortez and Silva (2008) examined how student characteristics and educational factors could be used to predict academic performance.\nTheir study used data from Portuguese secondary school students and identified several factors associated with academic achievement, providing a foundation for examining the relationship between study time and final grades."
+  },
+  {
+    "objectID": "index.html#method",
+    "href": "index.html#method",
+    "title": "Ten Sentence Term Paper",
+    "section": "Method",
+    "text": "Method\n\nimport pandas as pd\nfrom scipy.stats import spearmanr\n\nurl = \"https://raw.githubusercontent.com/MakroMB/student-performance-analysis/main/data/student-mat.csv\"\n\ndf = pd.read_csv(url, sep=\";\")\n\nprint(df.shape)\ndf.head()\n\n(395, 33)\n\n\n\n\n\n\n\n\n\nschool\nsex\nage\naddress\nfamsize\nPstatus\nMedu\nFedu\nMjob\nFjob\n...\nfamrel\nfreetime\ngoout\nDalc\nWalc\nhealth\nabsences\nG1\nG2\nG3\n\n\n\n\n0\nGP\nF\n18\nU\nGT3\nA\n4\n4\nat_home\nteacher\n...\n4\n3\n4\n1\n1\n3\n6\n5\n6\n6\n\n\n1\nGP\nF\n17\nU\nGT3\nT\n1\n1\nat_home\nother\n...\n5\n3\n3\n1\n1\n3\n4\n5\n5\n6\n\n\n2\nGP\nF\n15\nU\nLE3\nT\n1\n1\nat_home\nother\n...\n4\n3\n2\n2\n3\n3\n10\n7\n8\n10\n\n\n3\nGP\nF\n15\nU\nGT3\nT\n4\n2\nhealth\nservices\n...\n3\n2\n2\n1\n1\n5\n2\n15\n14\n15\n\n\n4\nGP\nF\n16\nU\nGT3\nT\n3\n3\nother\nother\n...\n4\n3\n2\n1\n2\n5\n4\n6\n10\n10\n\n\n\n\n5 rows × 33 columns\n\n\n\nThis study uses the Student Performance dataset collected from Portuguese secondary school students by Cortez and Silva (2008), containing 395 observations and 33 variables.\nSpearman correlation analysis was used to examine the relationship between students’ reported study time (studytime) and their final mathematics grades (G3), because study time is measured as an ordinal variable with four categories."
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "Ten Sentence Term Paper",
+    "section": "Results",
+    "text": "Results\n\ncorr_val, pval = spearmanr(df[\"studytime\"], df[\"G3\"])\n\nnarrative = \"a very strong negative correlation\"\n\nif corr_val &gt; .8:\n    narrative = \"a very strong positive correlation\"\nelif corr_val &gt; .4:\n    narrative = \"a moderate positive correlation\"\nelif corr_val &gt; 0:\n    narrative = \"a positive but weak correlation\"\nelif corr_val &gt; -.4:\n    narrative = \"a negative but weak correlation\"\nelif corr_val &gt; -.8:\n    narrative = \"a moderate negative correlation\"\n\nprint(\"Correlation:\", corr_val)\nprint(\"P-value:\", pval)\nprint(\"Interpretation:\", narrative)\n\nCorrelation: 0.10516968678133246\nP-value: 0.0366735828712141\nInterpretation: a positive but weak correlation\n\n\nUsing Spearman correlation analysis, the data produced a correlation coefficient of 0.105 with a p-value of 0.037.\nThis result indicates a positive but weak correlation between students’ study time and their final grades.\n\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\nfig, ax = plt.subplots(figsize=(6, 3.5))\n\nsns.scatterplot(data=df, x=\"studytime\", y=\"G3\")\n\nplt.xlabel(\"Study Time\")\nplt.ylabel(\"Final Grade (G3)\")\nplt.show()\n\n\n\n\n\n\n\nFigure 1: A scatterplot of study time and final grades\n\n\n\n\n\nAs shown in Figure 1, students who reported more study time tended to have slightly higher final grades, although the relationship was weak."
+  },
+  {
+    "objectID": "index.html#discussion",
+    "href": "index.html#discussion",
+    "title": "Ten Sentence Term Paper",
+    "section": "Discussion",
+    "text": "Discussion\nThe results suggest that students who spend more time studying tend to achieve slightly higher final grades, although the relationship is weak (Spearman’s ρ = 0.105, p = .037).\nHowever, because the correlation is weak and the data are observational, study time alone cannot reliably predict academic performance, and other factors may also influence students’ final grades.\n\nsns.lmplot(data=df, x=\"studytime\", y=\"G3\")\n\nplt.xlabel(\"Study Time\")\nplt.ylabel(\"Final Grade (G3)\")\nplt.show()\n\n\n\n\n\n\n\nFigure 2: Regression plot of study time and final grades\n\n\n\n\n\nAs shown in Figure 2, the regression line shows a slight upward trend, suggesting that students who spend more time studying tend to achieve slightly higher final grades.\n\nsns.jointplot(\n    data=df,\n    x=\"studytime\",\n    y=\"G3\",\n    kind=\"hex\"\n)\n\nplt.show()\n\n\n\n\n\n\n\nFigure 3: Joint plot of study time and final grades\n\n\n\n\n\nAs shown in Figure 3, most students are concentrated in the lower study-time categories, with final grades generally clustering around 10 to 15 points."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  }
+]
