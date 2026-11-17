@@ -1,0 +1,121 @@
+---
+title: "Ten Sentence Term Paper"
+author: "Kuo Wang"
+date: "2026-11-13"
+abstract: "This paper examines the relationship between two variables using Python and correlation analysis."
+bibliography: references.bib
+execute:
+  echo: true
+---
+
+## Introduction
+
+Academic performance is an important aspect of students' educational success, and study time may be related to their academic outcomes.
+
+This study examines whether students who spend more time studying tend to achieve higher final grades.
+
+## Literature Review
+
+
+Previous research by @cortez2008 examined how student characteristics and educational factors could be used to predict academic performance.
+
+Their study used data from Portuguese secondary school students and identified several factors associated with academic achievement, providing a foundation for examining the relationship between study time and final grades.
+
+## Method
+
+```{python}
+import pandas as pd
+from scipy.stats import spearmanr
+
+url = "https://raw.githubusercontent.com/MakroMB/student-performance-analysis/main/data/student-mat.csv"
+
+df = pd.read_csv(url, sep=";")
+
+print(df.shape)
+df.head()
+```
+This study uses the Student Performance dataset collected from Portuguese secondary school students by Cortez and Silva (2008), containing 395 observations and 33 variables.
+
+Spearman correlation analysis was used to examine the relationship between students' reported study time (studytime) and their final mathematics grades (G3), because study time is measured as an ordinal variable with four categories.
+
+## Results
+
+```{python}
+corr_val, pval = spearmanr(df["studytime"], df["G3"])
+
+narrative = "a very strong negative correlation"
+
+if corr_val > .8:
+    narrative = "a very strong positive correlation"
+elif corr_val > .4:
+    narrative = "a moderate positive correlation"
+elif corr_val > 0:
+    narrative = "a positive but weak correlation"
+elif corr_val > -.4:
+    narrative = "a negative but weak correlation"
+elif corr_val > -.8:
+    narrative = "a moderate negative correlation"
+
+print("Correlation:", corr_val)
+print("P-value:", pval)
+print("Interpretation:", narrative)
+```
+
+Using Spearman correlation analysis, the data produced a correlation coefficient of `{python} f"{corr_val:.3f}"` with a p-value of `{python} f"{pval:.3f}"`.
+
+This result indicates `{python} narrative` between students' study time and their final grades.
+
+
+```{python}
+#| label: fig-studytime-grades
+#| fig-cap: "A scatterplot of study time and final grades"
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(6, 3.5))
+
+sns.scatterplot(data=df, x="studytime", y="G3")
+
+plt.xlabel("Study Time")
+plt.ylabel("Final Grade (G3)")
+plt.show()
+```
+
+As shown in @fig-studytime-grades, students who reported more study time tended to have slightly higher final grades, although the relationship was weak.
+
+## Discussion
+
+The results suggest that students who spend more time studying tend to achieve slightly higher final grades, although the relationship is weak (Spearman's ρ = 0.105, p = .037).
+
+However, because the correlation is weak and the data are observational, study time alone cannot reliably predict academic performance, and other factors may also influence students' final grades.
+
+```{python}
+#| label: fig-studytime-regression
+#| fig-cap: "Regression plot of study time and final grades"
+
+sns.lmplot(data=df, x="studytime", y="G3")
+
+plt.xlabel("Study Time")
+plt.ylabel("Final Grade (G3)")
+plt.show()
+```
+
+As shown in @fig-studytime-regression, the regression line shows a slight upward trend, suggesting that students who spend more time studying tend to achieve slightly higher final grades.
+
+
+```{python}
+#| label: fig-studytime-joint
+#| fig-cap: "Joint plot of study time and final grades"
+
+sns.jointplot(
+    data=df,
+    x="studytime",
+    y="G3",
+    kind="hex"
+)
+
+plt.show()
+```
+As shown in @fig-studytime-joint, most students are concentrated in the lower study-time categories, with final grades generally clustering around 10 to 15 points.
+

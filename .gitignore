@@ -1,0 +1,159 @@
+
+# .gitignore for a Quarto Website Project
+# Original version generated with assistance from OpenAI ChatGPT.
+# Model: GPT-6 (OpenAI)
+# Settings: Default ChatGPT conversational environment;
+# model reasoning effort and generation parameters not disclosed.
+# Purpose: Exclude temporary, generated, cached, and
+# system-specific files from version control.
+
+# ==========================================
+# 1. Operating Systems: Windows and macOS
+# ==========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100/
+.Trashes/
+.fseventsd/
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# ==========================================
+# 2. Python
+# ==========================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+conda-env/
+.conda/
+
+# Python packaging and testing artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ==========================================
+# 3. Jupyter Notebook and JupyterLab
+# ==========================================
+
+.ipynb_checkpoints/
+.virtual_documents/
+.jupyter/
+.jupyterlab-workspace/
+*.nbconvert.ipynb
+
+# ==========================================
+# 4. R and RStudio
+# ==========================================
+
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+.Renviron
+
+# R temporary and generated files
+.Rcheck/
+*.Rcheck/
+*.Rout
+*.Rout.fail
+
+# Keep reproducibility files such as
+# renv.lock and .Rprofile when needed.
+
+# ==========================================
+# 5. Quarto
+# ==========================================
+
+# Quarto cache and temporary files
+.quarto/
+*_cache/
+*_files/
+.quarto_ipynb/
+
+# Rendered website output
+_site/
+_book/
+
+# ==========================================
+# 6. IDEs and Editors
+# ==========================================
+
+# Visual Studio Code
+.vscode/
+
+# PyCharm and JetBrains IDEs
+.idea/
+
+# Other editor artifacts
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+
+# ==========================================
+# 7. Logs and Temporary Files
+# ==========================================
+
+*.log
+*.temp
+*.cache
+.cache/
+tmp/
+temp/
+
+# ==========================================
+# 8. Local Project Environments
+# ==========================================
+
+anaconda_projects/
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# 9. Files to Keep in Git
+# ==========================================
+
+# Keep source files such as:
+# index.qmd
+# about.qmd
+# _quarto.yml
+# styles.css
+# *.py
+# *.R
+# *.ipynb
+# requirements.txt
+# environment.yml
+# renv.lock
+#
+# These are not ignored by this file.
